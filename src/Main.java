@@ -22,12 +22,17 @@ void main(String[] args)
     //Initialize Scanner
     Scanner inputReader = new Scanner(System.in);
 
-    //Ask for a guess
-    int guess = askForInput(inputReader);
-    System.out.println("You guessed: " + guess);
+    //Main gameplay loop, exits on gameWon
+    boolean gameWon = false;
+    while (!gameWon)
+    {
+        //Ask for a guess
+        int guess = askForInput(inputReader);
+        System.out.println("You guessed: " + guess);
 
-    //Compare guess to randomNumber and evaluated based on state
-    CompareGuess outcome = result(guess, randomNumber);
+        //Compare guess to randomNumber and evaluated based on state
+        CompareGuess outcome = result(guess, randomNumber);
+    }
 }
 //Math.random returns double between 0 and 1,
 // multiply by range and add 1 to match scale.
