@@ -38,8 +38,24 @@ public int getRandomNumber(int min, int max)
 //Scanner takes input
 public int askForInput(Scanner inputReader)
 {
-    System.out.println("Enter your guess: ");
-    int guessedNumber = inputReader.nextInt();
+    boolean validInput = false;
+    int guessedNumber = 0;
+
+    while (!validInput)
+    {
+        System.out.println("Enter your guess: ");
+
+        if (inputReader.hasNextInt())
+        {
+            guessedNumber = inputReader.nextInt();
+            validInput = true;
+        } else
+        {
+            System.out.println("Invalid guess, input an integer.");
+            inputReader.next();
+        }
+    }
+
     return guessedNumber;
 }
 //Compare guess and randomNumber using custom enum to assign state
