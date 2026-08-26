@@ -18,6 +18,8 @@ void main(String[] args)
 
     //Generate number through method call
     int randomNumber = getRandomNumber( 1, 100);
+
+    //Initialize Scanner
     Scanner inputReader = new Scanner(System.in);
 
     //Ask for a guess
@@ -27,19 +29,20 @@ void main(String[] args)
     //Compare guess to randomNumber and evaluated based on state
     CompareGuess outcome = result(guess, randomNumber);
 }
-
+//Math.random returns double between 0 and 1,
+// multiply by range and add 1 to match scale.
 public int getRandomNumber(int min, int max)
 {
     return (int) ((Math.random() * (max - min + 1)) + min);
 }
-
+//Scanner takes input
 public int askForInput(Scanner inputReader)
 {
     System.out.println("Enter your guess: ");
     int guessedNumber = inputReader.nextInt();
     return guessedNumber;
 }
-
+//Compare guess and randomNumber using custom enum to assign state
 public CompareGuess result(int guess, int randomNumber)
 {
     if (guess == randomNumber)
@@ -56,8 +59,5 @@ public CompareGuess result(int guess, int randomNumber)
     }
 }
 
-//Be om input
-//kontrollera input
-//utvärdera och tillämpa resultat == Rätt gissat -> spelet slut, fel gissat == loop till be om input och ge feedback
 //spelet slut -> be om input, spela igen? Starta om loop från generera tal
 //quit kommando som fungerar i alla faser av programmet
