@@ -1,4 +1,8 @@
+//Import Scanner to handle player input
 import java.util.Scanner;
+
+//Initialize Scanner
+Scanner inputReader = new Scanner(System.in);
 
 //declares valid states for any guess
 public enum CompareGuess
@@ -7,34 +11,47 @@ public enum CompareGuess
     HIGH,
     LOW
 }
-
 void main(String[] args)
+{
+    boolean playing = true;
+    while (playing)
+    {
+        gameLoop();
+
+        System.out.println("Play again?(Y/N)");
+        String replay = inputReader.nextLine();
+        if (!replay.equals("Y") && !replay.equals("y"))
+        {
+            playing = false;
+        }
+    }
+}
+
+void gameLoop()
 {
     //Start, explain rules and commands.
     System.out.println("Guessing Game");
     System.out.println("=============");
     System.out.println("Guess what number between 1 and 100 is the correct number.");
-    System.out.println("Press Esc at any time to quit program.");
 
     //Generate number through method call
     int randomNumber = getRandomNumber( 1, 100);
-
-    //Initialize Scanner
-    Scanner inputReader = new Scanner(System.in);
 
     //Main gameplay loop, exits on gameWon
     boolean gameWon = false;
     while (!gameWon)
     {
         //Ask for a guess
-        int guess = askForInput(inputReader);
+        int guess = askForInput();
         System.out.println("You guessed: " + guess);
 
         //Compare guess to randomNumber and evaluated based on state
         CompareGuess outcome = result(guess, randomNumber);
 
+        //Use evaluated guess to provide feedback
         guessFeedback(outcome);
 
+        //Break loop in guess is correct
         if (outcome == CompareGuess.CORRECT)
         {
             gameWon = true;
@@ -47,8 +64,8 @@ public int getRandomNumber(int min, int max)
 {
     return (int) ((Math.random() * (max - min + 1)) + min);
 }
-//Scanner takes input
-public int askForInput(Scanner inputReader)
+//Scanner takes input, invalid input exception
+public int askForInput()
 {
     boolean validInput = false;
     int guessedNumber = 0;
@@ -67,7 +84,7 @@ public int askForInput(Scanner inputReader)
             inputReader.next();
         }
     }
-
+    inputReader.nextLine();
     return guessedNumber;
 }
 //Compare guess and randomNumber using custom enum to assign state
@@ -86,7 +103,7 @@ public CompareGuess result(int guess, int randomNumber)
         return CompareGuess.HIGH;
     }
 }
-
+//Gives feedback derived from outcome enum state, void method returns nothing
 public void guessFeedback(CompareGuess outcome)
 {
     if (outcome == CompareGuess.CORRECT)
@@ -102,6 +119,3 @@ public void guessFeedback(CompareGuess outcome)
         System.out.println("You guessed wrong, the correct number is higher than your guess.");
     }
 }
-
-//spelet slut -> be om input, spela igen? Starta om loop från generera tal
-//quit kommando som fungerar i alla faser av programmet
