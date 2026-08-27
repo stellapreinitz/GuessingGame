@@ -32,6 +32,8 @@ void main(String[] args)
 
         //Compare guess to randomNumber and evaluated based on state
         CompareGuess outcome = result(guess, randomNumber);
+
+        guessFeedback(outcome);
     }
 }
 //Math.random returns double between 0 and 1,
@@ -77,6 +79,22 @@ public CompareGuess result(int guess, int randomNumber)
     else
     {
         return CompareGuess.HIGH;
+    }
+}
+
+public void guessFeedback(CompareGuess outcome)
+{
+    if (outcome == CompareGuess.CORRECT)
+    {
+        System.out.println("You guessed correct!");
+    }
+    else if (outcome == CompareGuess.HIGH)
+    {
+        System.out.println("You guessed wrong, the correct number is lower than your guess.");
+    }
+    else
+    {
+        System.out.println("You guessed wrong, the correct number is higher than your guess.");
     }
 }
 
