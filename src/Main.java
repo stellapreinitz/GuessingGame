@@ -11,6 +11,7 @@ public enum CompareGuess
     HIGH,
     LOW
 }
+//Main, contains gameLoop and conditional for restarting them game withing the programs runtime
 void main(String[] args)
 {
     boolean playing = true;
@@ -18,6 +19,7 @@ void main(String[] args)
     {
         gameLoop();
 
+        //Logic only checks for affirmative commands, anything else is interpreted as no
         System.out.println("Play again?(Y/N)");
         String replay = inputReader.nextLine();
         if (!replay.equals("Y") && !replay.equals("y"))
@@ -29,7 +31,7 @@ void main(String[] args)
 
 void gameLoop()
 {
-    //Start, explain rules and commands.
+    //Start, explain rules.
     System.out.println("Guessing Game");
     System.out.println("=============");
     System.out.println("Guess what number between 1 and 100 is the correct number.");
@@ -84,6 +86,7 @@ public int askForInput()
             inputReader.next();
         }
     }
+    //This line clears the input buffer, protects against bugs when next input is a String
     inputReader.nextLine();
     return guessedNumber;
 }
