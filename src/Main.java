@@ -34,6 +34,11 @@ void main(String[] args)
         CompareGuess outcome = result(guess, randomNumber);
 
         guessFeedback(outcome);
+
+        if (outcome == CompareGuess.CORRECT)
+        {
+            gameWon = true;
+        }
     }
 }
 //Math.random returns double between 0 and 1,
